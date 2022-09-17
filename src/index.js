@@ -44,7 +44,6 @@ var ejs = require("ejs");
 var Markup = /** @class */ (function () {
     function Markup() {
         this.html = "".concat(__dirname, "/index.html");
-        this.savePath = 'image.png';
         this.view = {
             width: 800,
             height: 600,
@@ -104,13 +103,10 @@ var Markup = /** @class */ (function () {
      */
     Markup.prototype.render = function (template, data, options) {
         return __awaiter(this, void 0, void 0, function () {
-            var _this = this;
+            var str;
             return __generator(this, function (_a) {
-                ejs.render(template, data !== null && data !== void 0 ? data : {}, options !== null && options !== void 0 ? options : {}, function (err, str) {
-                    if (err)
-                        throw err;
-                    (0, fs_1.writeFileSync)(_this.html, str, 'utf-8');
-                });
+                str = ejs.render(template, data !== null && data !== void 0 ? data : {}, options !== null && options !== void 0 ? options : {});
+                (0, fs_1.writeFileSync)(this.html, str, 'utf-8');
                 return [2 /*return*/];
             });
         });
@@ -147,9 +143,8 @@ var Markup = /** @class */ (function () {
      */
     Markup.prototype.save = function (savePath, fullPage, transparent) {
         var _a, _b, _c, _d, _e, _f;
-        if (savePath === void 0) { savePath = this.savePath; }
         return __awaiter(this, void 0, void 0, function () {
-            var _g, browser, page;
+            var _g, browser, page, buffer, buffer;
             return __generator(this, function (_h) {
                 switch (_h.label) {
                     case 0: return [4 /*yield*/, this.initialize()];
@@ -165,12 +160,23 @@ var Markup = /** @class */ (function () {
                         return [4 /*yield*/, page.goto("file:///".concat(this.html), { waitUntil: 'load', timeout: 0 })];
                     case 3:
                         _h.sent();
+                        if (!(typeof savePath == 'string')) return [3 /*break*/, 6];
                         return [4 /*yield*/, page.screenshot({ path: savePath, omitBackground: transparent !== null && transparent !== void 0 ? transparent : false, fullPage: fullPage !== null && fullPage !== void 0 ? fullPage : false })];
                     case 4:
-                        _h.sent();
+                        buffer = _h.sent();
                         return [4 /*yield*/, browser.close()];
                     case 5:
                         _h.sent();
+                        return [2 /*return*/, buffer];
+                    case 6: return [4 /*yield*/, page.screenshot({ omitBackground: transparent !== null && transparent !== void 0 ? transparent : false, fullPage: fullPage !== null && fullPage !== void 0 ? fullPage : false })];
+                    case 7:
+                        buffer = _h.sent();
+                        return [4 /*yield*/, browser.close()];
+                    case 8:
+                        _h.sent();
+                        return [2 /*return*/, buffer];
+                    case 9:
+                        ;
                         return [2 /*return*/];
                 }
             });
@@ -190,9 +196,8 @@ var Markup = /** @class */ (function () {
      */
     Markup.prototype.saveRegion = function (savePath, options, transparent) {
         var _a, _b, _c, _d, _e, _f;
-        if (savePath === void 0) { savePath = this.savePath; }
         return __awaiter(this, void 0, void 0, function () {
-            var _g, browser, page;
+            var _g, browser, page, buffer, buffer;
             return __generator(this, function (_h) {
                 switch (_h.label) {
                     case 0: return [4 /*yield*/, this.initialize()];
@@ -208,12 +213,23 @@ var Markup = /** @class */ (function () {
                         return [4 /*yield*/, page.goto("file:///".concat(this.html), { waitUntil: 'load', timeout: 0 })];
                     case 3:
                         _h.sent();
+                        if (!(typeof savePath == 'string')) return [3 /*break*/, 6];
                         return [4 /*yield*/, page.screenshot({ path: savePath, omitBackground: transparent !== null && transparent !== void 0 ? transparent : false, clip: options })];
                     case 4:
-                        _h.sent();
+                        buffer = _h.sent();
                         return [4 /*yield*/, browser.close()];
                     case 5:
                         _h.sent();
+                        return [2 /*return*/, buffer];
+                    case 6: return [4 /*yield*/, page.screenshot({ omitBackground: transparent !== null && transparent !== void 0 ? transparent : false, clip: options })];
+                    case 7:
+                        buffer = _h.sent();
+                        return [4 /*yield*/, browser.close()];
+                    case 8:
+                        _h.sent();
+                        return [2 /*return*/, buffer];
+                    case 9:
+                        ;
                         return [2 /*return*/];
                 }
             });

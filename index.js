@@ -1,9 +1,7 @@
-const { Markup } = require('canvas-markup');
+const { Markup } = require('./src/index');
 
 const markup = new Markup();
 
-/* Rendering the file index.ejs and saving it as a png. */
-markup.renderFile(`${__dirname}\\index.ejs`, { title: 'Markup', description: 'Made with Canvas-Markup©' });
-/* Setting the viewport of the display to 1920x1080. */
-markup.setViewport(1920, 1080);
-markup.save();
+markup.render('<img src="https://shop.chessok.ru/wa-data/public/shop/products/63/12/1263/images/294/294.970.jpg" alt></img>').then(async () => {
+    await markup.saveRegion({ x: 0, y: 0, width: 80, height: 80 });
+});

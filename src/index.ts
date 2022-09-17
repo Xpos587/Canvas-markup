@@ -6,12 +6,10 @@ import * as ejs from 'ejs';
 
 export class Markup {
     private html: string;
-    private savePath: string;
     private view: { width: number, height: number, deviceScaleFactor: number };
 
     constructor() {
         this.html = `${__dirname}/index.html`;
-        this.savePath = 'image.png';
 
         this.view = {
             width: 800,
@@ -53,10 +51,8 @@ export class Markup {
      * @param options options for ejs.
      */
     async render(template: string, data?: object, options?: object) {
-        ejs.render(template, data ?? {}, options ?? {}, (err: any, str: any) => {
-            if (err) throw err;
-            writeFileSync(this.html, str, 'utf-8');
-        });
+        const str = ejs.render(template, data ?? {}, options ?? {});
+        writeFileSync(this.html, str, 'utf-8');
     };
 
     /**
@@ -81,7 +77,7 @@ export class Markup {
      * @param fullPage save fullpage.
      * @param transparent it removes the white background.
      */
-    async save(savePath: string = this.savePath, fullPage?: boolean, transparent?: boolean) {
+    async save(savePath?: string, fullPage?: boolean, transparent?: boolean) {
         const { browser, page } = await this.initialize();
 
         await page.setViewport({
@@ -91,9 +87,16 @@ export class Markup {
         });
 
         await page.goto(`file:///${this.html}`, { waitUntil: 'load', timeout: 0 });
-        await page.screenshot({ path: savePath, omitBackground: transparent ?? false, fullPage: fullPage ?? false });
 
-        await browser.close();
+        if (typeof savePath == 'string') {
+            const buffer = await page.screenshot({ path: savePath, omitBackground: transparent ?? false, fullPage: fullPage ?? false });
+            await browser.close();
+            return buffer;
+        } else {
+            const buffer = await page.screenshot({ omitBackground: transparent ?? false, fullPage: fullPage ?? false });
+            await browser.close();
+            return buffer;
+        };
     };
 
     /**
@@ -107,7 +110,7 @@ export class Markup {
      * * `height` - pixels high
      * @param transparent it removes the white background.
      */
-    async saveRegion(savePath: string = this.savePath, options?: { x: number, y: number, width: number, height: number }, transparent?: boolean) {
+    async saveRegion(savePath?: string, options?: { x: number, y: number, width: number, height: number }, transparent?: boolean) {
         const { browser, page } = await this.initialize();
 
         await page.setViewport({
@@ -117,8 +120,15 @@ export class Markup {
         });
 
         await page.goto(`file:///${this.html}`, { waitUntil: 'load', timeout: 0 });
-        await page.screenshot({ path: savePath, omitBackground: transparent ?? false, clip: options });
 
-        await browser.close();
+        if (typeof savePath == 'string') {
+            const buffer = await page.screenshot({ path: savePath, omitBackground: transparent ?? false, clip: options });
+            await browser.close();
+            return buffer;
+        } else {
+            const buffer = await page.screenshot({ omitBackground: transparent ?? false, clip: options });
+            await browser.close();
+            return buffer;
+        };
     };
 }
