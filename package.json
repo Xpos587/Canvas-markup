@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "@types/ejs": "^3.1.1",
+    "@types/puppeteer": "^5.4.6",
+    "typedoc": "^0.23.14"
+  },
+  "name": "canvas-markup",
+  "description": "It lib is used to render html to image",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xpos587/Canvas-markup.git"
+  },
+  "keywords": [],
+  "author": "xpos587",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Xpos587/Canvas-markup/issues"
+  },
+  "homepage": "https://github.com/Xpos587/Canvas-markup#readme",
+  "dependencies": {
+    "ejs": "^3.1.8",
+    "puppeteer": "^17.1.3"
+  }
+}
