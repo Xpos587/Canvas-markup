@@ -1,13 +1,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-%230074c1.svg)](http://www.typescriptlang.org/)
 
-<img style="border-radius: 5%" src="https://github.com/Xpos587/Canvas-markup/blob/main/logo.png?raw=true" alt></img>
+<img style="border-radius: 5%" src="https://github.com/Xpos587/Canvas-markup/blob/master/logo.png?raw=true" alt></img>
 <br>
 <br>
 <br>
 
 Canvas-markup
-======
+=============
 Canvas-markup - It lib is used to render html to image
 
 #### **Example**

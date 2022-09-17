@@ -6,7 +6,7 @@
   },
   "name": "canvas-markup",
   "description": "It lib is used to render html to image",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "src/index.js",
   "directories": {
     "doc": "docs"
@@ -16,7 +16,7 @@
     "type": "git",
     "url": "git+https://github.com/Xpos587/Canvas-markup.git"
   },
-  "keywords": [],
+  "keywords": ["canvas", "markup", "html", "img", "css", "ejs", "image"],
   "author": "xpos587",
   "license": "MIT",
   "bugs": {
